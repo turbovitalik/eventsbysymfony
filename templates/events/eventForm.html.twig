@@ -1,0 +1,582 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}Veranstaltung erstellen{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %}
+
+<div class="block block-member-profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        {{ include('side-menu.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-9 col-md-9 overflowX-hidden">
+                <h1 class="col-md-12 title-bold">Veranstaltungen</h1>
+                <form class="col-md-12 profile-events-form" id="profile-events_form" method="post">
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12">
+                            <div class="member-profile-caption profile-tittle">Neue Veranstaltung erstellen</div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption">Titel der Veranstaltung</div>
+                        </div>
+                        <div class="col-md-12 pt0">
+                            <div class="form-group">
+                                <input type="text" name="Event-Title" class="form-control member-form-control-styled_blank" id="inputEventTitle" onkeyup="eventTitleCounter(this)" maxlength="80">
+                                <label for="inputEventTitle">Noch <span id="eventTitleCounter">80</span> Zeichen übrig</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption">Beschreibung der Veranstaltung</div>
+                        </div>
+                        <div class="col-md-12 pt0">
+                            <div class="form-group">
+                                <textarea type="text" rows="10" style="font-weight: 100!important;" name="Event-Title-Description" class="form-control member-form-control-styled_blank" id="inputDescriptionTitle" onkeyup="eventDescriptionCounter(this)" maxlength="2000" placeholder="Bitte gib hier deine Veranstaltungsbeschreibung ein."></textarea>
+                                <label for="eventDescriptionCounter">Noch <span id="eventDescriptionCounter">2000</span> Zeichen übrig</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption">Co-AnbieterInnen und AssistenInnen hinzufügen</div>
+                            <div class="">
+                                Du wirst automatisch als AnbieterIn der Veranstaltung angezeigt. Falls weitere AnbieterInnen beteiligt sind, kannst
+                                du diese hier eintragen. Sofern sie vtw-Mitglieder sind, bitte den Vornamen in das Feld eingeben und warten, bis
+                                sich das Dropdown-Menü mit der Namensliste öffnet. Dann den entsprechenden Namen auswählen und rechts auf
+                                den Button klicken. So wird der Name in der Veranstaltungsliste auch mit dem Profil der anderen Miglieder
+                                verlinkt. Dasselbe gilt für AssistentInnen. Sie erscheinen dann auf der Detailseite deiner Veranstaltung.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6 member-profile-section_part">
+                                <div class="member-profile-caption col-md-12">AnbieterIn hinzufügen</div>
+                                <div class="col-md-6 member-profile-section_part">
+                                    <input name="AnotherTrainer" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
+                                </div>
+                                <div class="col-md-6 pl-xs-0 pt-xs-15  pl-sm-0 pt-sm-15 d-sm-inline-table">
+                                    <button type="button" name="Add-Trainer" id="addTrainer"  class="btn btn-main" data-container="body" data-toggle="popover" data-placement="top" data-html="true">
+                                        Co-AnbieterIn hinzufügen
+                                    </button>
+                                    <div id="popover-content-addTrainer" class="hide">
+                                        <select class="list-group add-trainer-list"  multiple="multiple">
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 0">Trainer Name 0</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 1">Trainer Name 1</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 2">Trainer Name 2</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 3">Trainer Name 3</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 4">Trainer Name 4</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 5">Trainer Name 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 member-profile-section_part">
+                                <div class="member-profile-caption col-md-12">AssistentIn hinzufügen</div>
+                                <div class="col-md-6 member-profile-section_part">
+                                    <input name="Another-Trainer" type="text" class="form-control member-form-control-styled_blank" id="inputAnotherTrainer" placeholder="Namen eingeben">
+                                </div>
+                                <div class="col-md-6 pl-xs-0 pt-xs-15 pl-sm-0 pt-sm-15 d-sm-inline-table">
+                                    <button type="button" name="Add-Another-Trainer" id="addAnotherTrainer"  class="btn btn-main" data-container="body" data-toggle="popover" data-placement="top" data-html="true">
+                                        AssistenIn hinzufügen
+                                    </button>
+                                    <div id="popover-content-addAnotherTrainer" class="hide">
+                                        <select class="list-group add-trainer-list"  multiple="multiple">
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 0">Trainer Name 0</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 1">Trainer Name 1</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 2">Trainer Name 2</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 3">Trainer Name 3</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 4">Trainer Name 4</option>
+                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 5">Trainer Name 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12" style="padding-bottom: 35px;">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption profile-tittle">Medien zur Veranstaltung</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 member-profile-section_part">
+                            <div class="member-profile-caption">Fotos</div>
+                            <div class="">
+                                <div id="fotosBox">
+                                    <div class="form-group" style="position:relative;">
+                                        <img src="./images/blank-img.png" alt="" class="w100" id="imgBlank-1">
+                                        <a href="#" class="remove_field w100 btn">Bild löschen</a>
+                                        <input type="text" class="member-form-control-styled_blank form-control fotoDescription" id="SubDescription-1">
+                                        <label>Beschreibung</label>
+                                        <span class="fileinput-button">
+                                            <span>Datei auswählen</span>
+                                            <input type="file" class="member-form-control-styled_blank form-control mt15 imgUploader" id="inputUploader-1">
+                                        </span>
+                                        <label>Es können nur jpg-Dateien mit max. 500 KB hochgeladen werden.</label>
+                                    </div>
+                                </div>
+                                <button id="maineStoryFotosBoxInput" type="button" class="btn btn-main DejaVuSerif">+ Foto hinzufügen</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 member-profile-section_part">
+                            <div class="member-profile-caption">Videos</div>
+                            <div class="">
+                                <div id="videoBox">
+                                    <div class="form-group">
+                                        <iframe class="w100" id="EventYoutube-1" style="margin-bottom: 15px;" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+                                        <a href="#" class="remove_video btn">Video löschen</a>
+                                        <input type="text" class="member-form-control-styled_blank form-control videoDescription" id="SubVideoDescription-1">
+                                        <label>Video-Unterzeile</label>
+                                        <input class="form-control member-form-control-styled_blank  videoUploader" id="eventVideo-1" placeholder="Video-Link eingeben">
+                                        <label for="EventYoutube-1">
+                                            Videos können hier nur verlinkt werden (z. B. von YouTube oder deinem eigenen Server).
+                                        </label>
+                                    </div>
+                                </div>
+                                <button id="maineStoryVideoBoxInput" type="button" class="btn btn-main DejaVuSerif">+ Video hinzufügen</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-0 member-profile-section_part">
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12">
+                            <div class="member-profile-caption">Veranstaltungsart, Datum und Uhrzeiten</div>
+                            <div class="">
+                                Falls die Veranstaltung in mehreren Blöcken (z. B. an mehreren Wochenenden) stattfindet, kannst du in der mittleren
+                                Spalte die Daten weiterer Blöcke hinzufügen. Es öffnet sich dann auch ein weiteres Feld für die Uhrzeiten des nächsten
+                                Blocks.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group" style="display:grid;">
+                                    <select name="Event-Type" class="form-control member-form-control-styled member-profile-visibility" id="eventType">
+                                        <option value="0">Abendveranstaltung</option>
+                                        <option value="1">Ausbildung</option>
+                                        <option value="2">Fortlaufender Kurs</option>
+                                        <option value="3">Mehrtägiges Seminar</option>
+                                        <option value="4">Online-Programm</option>
+                                        <option value="5">Tagesseminar</option>
+                                        <option value="6">Vortrag</option>
+                                    </select>
+                                    <i class="m-icon icon-arrow-combo mt5"></i>
+                                    <label for="eventType">Veranstaltungsart</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <input name="dataFinishEvent" class="form-control member-form-control-styled_blank" id="dataStartEvent-1" placeholder="Datum auswählen ">
+                                    <label for="dataStartEvent">Beginn der Veranstaltung (bei mehreren Blöcken: Block 1)</label>
+                                </div>
+                                <div class="form-group">
+                                    <input name="dataFinishEvent" class="form-control member-form-control-styled_blank" id="dataFinishEvent-1" placeholder="Datum auswählen ">
+                                    <label for="dataFinishEvent">Beginn der Veranstaltung (bei mehreren Blöcken: Block 1)</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="eventDescription" id="eventDescription-1" rows="10"></textarea>
+                                    <label for="eventDescription">Uhrzeiten der Veranstaltung (bei mehreren Blöcken: Block 1)</label>
+                                </div>
+                            </div>
+                            <div id="CalendarBox"></div>
+                            <div id="addEventBlock" onclick="addEventBlock()" class="addEventBlock col-md-12 text-center"><p>+ Block hinzufügen</p></div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption">Kosten</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <select name="Event-costs" class="form-control member-form-control-styled" id="eventCosts">
+                                        <option value="1">Preis fix</option>
+                                        <option value="2">Preis ab</option>
+                                    </select>
+                                    <i class="m-icon icon-arrow-combo"></i>
+                                    <label for="eventCosts">Kostenstaffelung</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 member-profile-section_part">
+                                <div class="form-group">
+                                    <input name="Event-price" type="number" class="form-control member-form-control-styled_blank" id="eventPrice" placeholder="350">
+                                    <label for="eventPrice">Kosten</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 member-profile-section_part">
+                                <div class="form-group">
+                                    <select name="Event-currency" class="form-control member-form-control-styled" id="eventCurrency">
+                                    <option value="1">EUR</option>
+                                    <option value="2">CHF</option>
+                                    </select>
+                                    <i class="m-icon icon-arrow-combo"></i>
+                                    <label for="eventCurrency">Währung</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption">Veranstaltungsort</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <input name="Event-place" class="form-control member-form-control-styled_blank" id="eventPlace" placeholder="Volkshochschule">
+                                    <label for="eventPlace">Firma / Institution</label>
+                                </div>
+                                <div class="form-group">
+                                    <input name="Event-address" class="form-control member-form-control-styled_blank" id="eventAddress" placeholder="Jungfernstieg 17">
+                                    <label for="eventAddress">Straße und Hausnummer</label>
+                                </div>
+                                <div class="form-group">
+                                    <input name="Event-town" class="form-control member-form-control-styled_blank" id="eventTown" placeholder="Hamburg">
+                                    <label for="eventTown">Ort</label>
+                                </div>
+                                <div class="form-group">
+                                    <input name="Event-website" class="form-control member-form-control-styled_blank" id="eventWebSite" placeholder="https://www.vhs-hamburg.de/sdkas">
+                                    <label for="eventWebSite">Website für weltere infos zur Veranstaltung</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <input name="Event-address2" class="form-control member-form-control-styled_blank" id="eventAddres2" placeholder="Haus 7, Raum 234 ">
+                                    <label for="eventAddres2">Adresszusatz</label>
+                                </div>
+                                <div class="form-group">
+                                    <input name="Event-zip-code" class="form-control member-form-control-styled_blank" id="eventZipCode" placeholder="21654">
+                                    <label for="eventZipCode">Postleitzahl</label>
+                                </div>
+                                <div class="form-group" style="display: grid;">
+                                    <select name="Event-country" class="form-control member-form-control-styled member-profile-visibility" id="eventCountry">
+                                    <option value="0">Deutschland</option>
+                                    <option value="1">some country</option>
+                                    <option value="2">some country</option>
+                                    </select>
+                                    <i class="m-icon icon-arrow-combo mt5"></i>
+                                    <label for="eventCountry">Land</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <iframe class="w100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6702.709255462977!2d9.984449632020224!3d53.55519383898035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b18f19584d4713%3A0x4119648d9540a394!2zSnVuZ2Zlcm5zdGllZyAxNywgMjAzNTQgSGFtYnVyZywg0JPQtdGA0LzQsNC90LjRjw!5e0!3m2!1sru!2sua!4v1541071512115" frameborder="0" style="border:0;height:192px;" allowfullscreen></iframe>
+                                    <label for="eventCountry">Vorschau Kartenansicht</label></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption">Vorkenntnisse und Credits</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <select name="Event-knowledge-necessary" class="form-control member-form-control-styled" id="eventKnowledgeNecessary">
+                                        <option value="1">Nein</option>
+                                        <option value="2">Ja</option>
+                                    </select>
+                                    <i class="m-icon icon-arrow-combo"></i>
+                                    <label for="eventKnowledgeNecessary">Vorkenntnisse erforderlich?</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <select name="Event-coach-status" class="form-control member-form-control-styled" id="eventCoachStatus" onchange="addCoachStatus();">
+                                        <option value="1">Nein</option>
+                                        <option value="2">Ja</option>
+                                    </select>
+                                    <i class="m-icon icon-arrow-combo"></i>
+                                    <label for="eventCoachStatus">Anerkannt für Ausbildung zum Coach (vtw)?</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 member-profile-section_part">
+                                <div class="form-group">
+                                    <select name="Event-ITW-education" class="form-control member-form-control-styled" id="eventITWeducation" onchange="addITWCredits();">
+                                        <option value="1">Nein</option>
+                                        <option value="2">Ja</option>
+                                    </select>
+                                    <i class="m-icon icon-arrow-combo"></i>
+                                    <label for="eventITWeducation">Anerkannt für ITW-Credits?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 member-profile-section_part">
+                        </div>
+                        <div class="col-lg-4 col-md-4 member-profile-section_part">
+                            <div id="coachCreditDays"></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 member-profile-section_part">
+                            <div id="ITWCreditDays"></div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12">
+                            <button type="submit" class="link-button memmberProfile-submit" id="createEventSubmit">Speichern</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/gijgo@1.9.11/js/messages/messages.de-de.js" type="text/javascript"></script>
+    <script>
+        $("[data-toggle=popover]").each(function(e) {
+            $(this).popover({
+                html: true,
+                content: function() {
+                    var id = $(this).attr('id')
+                    return $('#popover-content-' + id).html();
+                }
+            });
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+
+        function displayVals( el ) {
+            var multiple = $(el).val();
+            document.getElementById("inputTrainerName").value = multiple;
+            if ($(el.target).data('toggle') !== 'popover'
+                && $(el.target).parents('.popover.in').length === 0) {
+                $('[data-toggle="popover"]').popover('hide');
+            }
+        }
+
+        function displayVals2( el ) {
+            var multiple = $(el).val();
+            document.getElementById("inputAnotherTrainer").value = multiple;
+            if ($(el.target).data('toggle') !== 'popover'
+                && $(el.target).parents('.popover.in').length === 0) {
+                $('[data-toggle="popover"]').popover('hide');
+            }
+        }
+
+        $('#dataStartEvent-1').datepicker({
+                uiLibrary: 'bootstrap4',
+                locale: 'de-de',
+                weekStartDay: 1,
+                value: '01/01/2018'
+        });
+
+        $('#dataFinishEvent-1').datepicker({
+                uiLibrary: 'bootstrap4',
+                locale: 'de-de',
+                weekStartDay: 1,
+                value: '01/01/2018'
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                    if(input.files[0].size > 500000){
+                        alert("File is too big!");
+                    }
+                    else
+                    reader.onload = function (e) {
+                        $('#EventPhoto').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#eventImg").change(function(){
+            readURL(this);
+        });
+
+        function  EventkLink() {
+            var videoLink = document.getElementById("eventVideo").value;
+            var cutLink = videoLink.split('be/')[1];
+            var getSrcObject = document.getElementById("EventYoutube");
+            getSrcObject.src = getSrcObject.src.replace("https://www.youtube.com/embed/GTTsSZpC-Og", "https://www.youtube.com/embed/" + cutLink);
+        }
+
+
+        $(document).ready(function() {
+            var max_fields_limit = 15; //set limit for maximum input fields
+            var x = 1; //initialize counter for text box
+            $('#maineStoryFotosBoxInput').click(function(e){ //click event on add more fields button having class add_more_button
+                e.preventDefault();
+                if(x < max_fields_limit){ //check conditions
+                    x++; //counter increment
+                    $('#fotosBox').append('\n' +
+                        '                                    <div class="form-group">\n' +
+                        '                                        <img src="./images/blank-img.png" alt="" class=" w100 " id="imgBlank-'+x+'">\n' +
+                        '                                        <a href="#" class="remove_field w100 btn">Bild loschen</a>\n' +
+                        '                                        <input type="text" class="member-form-control-styled_blank form-control" id="SubDescription-'+x+'">\n' +
+                        '                                        <label>Beschreibung</label>\n' +
+                        '                                        <span class="fileinput-button">\n' +
+                        '                                          <span>Datei auswählen</span>\n' +
+                        '                                          <input type="file" class="member-form-control-styled_blank form-control mt15 imgUploader" id="inputUploader-\'+x+\'">\n' +
+                        '                                        </span>\n' +
+                        '                                        <label>Es können nur jpg-Dateien mit max. 500 KB hochgeladen werden.</label>\n' +
+                        '                                    </div>'); //add input field
+                }
+                $('.imgUploader').change(function () {
+                    if (this.files && this.files[0] && this.files[0].size < 500000) {
+                        var reader = new FileReader();
+                        var elemId = this.id.split("-")[1];
+                        reader.onload = function (e) {
+                            $('#imgBlank-'+elemId)
+                                .attr('src', e.target.result);
+                        };
+                        reader.readAsDataURL(this.files[0]);
+                    } else {
+                        alert("File is too big!");
+                        this.value = "";
+                    }
+                });
+
+            });
+            $('.imgUploader').change(function () {
+                if (this.files && this.files[0] && this.files[0].size < 500000) {
+                    var reader = new FileReader();
+                    var elemId = this.id.split("-")[1];
+                    reader.onload = function (e) {
+                        $('#imgBlank-'+elemId)
+                            .attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    alert("File is too big!");
+                    this.value = "";
+                }
+            });
+            $('#fotosBox').on("click",".remove_field", function(e){ //user click on remove text links
+                e.preventDefault();
+                $(this).parent('div').remove();
+                x--;
+            })
+        });
+
+        $(document).ready(function() {
+            var max_fields_limit = 15; //set limit for maximum input fields
+            var i = 1; //initialize counter for text box
+            $('#maineStoryVideoBoxInput').click(function(e){ //click event on add more fields button having class add_more_button
+                e.preventDefault();
+                if(i < max_fields_limit){ //check conditions
+                    i++; //counter increment
+                    $('#videoBox').append('                                    <div class="form-group">\n' +
+                        '                                        <iframe class="w100" id="EventYoutube-'+i+'" style="margin-bottom: 15px;" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>\n' +
+                        '                                        <a href="#" class="remove_video btn">Video löschen</a>\n' +
+                        '                                        <input type="text" class="member-form-control-styled_blank form-control" id="SubVideoDescription-'+i+'">\n' +
+                        '                                        <label>Video-Unterzeile</label>\n' +
+                        '                                        <input class="form-control member-form-control-styled_blank videoUploader" id="eventVideo-'+i+'" placeholder="Video-Link eingeben">\n' +
+                        '                                        <label>\n' +
+                        '                                            Videos können hier nur verlinkt werden (z. B. von YouTube oder deinem eigenen Server).\n' +
+                        '                                        </label>\n' +
+                        '                                    </div>'); //add input field
+                }
+                $('.videoUploader').change(function () {
+                    var videoId =  this.id.split("-")[1];
+                    var videoLink = document.getElementById("eventVideo-"+videoId).value;
+                    var cutLink = videoLink.split('be/')[1];
+                    var getSrcObject = document.getElementById("EventYoutube-"+videoId);
+                    getSrcObject.src = getSrcObject.src.replace("https://www.youtube.com/embed/", "https://www.youtube.com/embed/" + cutLink);
+                });
+            });
+            $('.videoUploader').change(function () {
+                var videoId =  this.id.split("-")[1];
+                var videoLink = document.getElementById("eventVideo-"+videoId).value;
+                var cutLink = videoLink.split('be/')[1];
+                var getSrcObject = document.getElementById("EventYoutube-"+videoId);
+                getSrcObject.src = getSrcObject.src.replace("https://www.youtube.com/embed/", "https://www.youtube.com/embed/" + cutLink);
+            });
+            $('#videoBox').on("click",".remove_video", function(e){ //user click on remove text links
+                e.preventDefault();
+                $(this).parent('div').remove();
+                i--;
+            })
+        });
+
+        function addCoachStatus() {
+            if(document.getElementById('eventCoachStatus').value == "2") {
+                var eventCoachStatus = document.getElementById('coachCreditDays');
+                eventCoachStatus.style.display ='block'
+                document.getElementById("coachCreditDays").innerHTML = "\n" +
+                    "<div class=\"form-group\">\n" +
+                    "    <select name=\"Coach-Credit-days\" class=\"form-control member-form-control-styled\" id=\"CoachCreditBerechnung\">\n" +
+                    "        <option value=\"1\">1</option>\n" +
+                    "        <option value=\"1.5\">1,5</option>\n" +
+                    "        <option value=\"2\">2</option>\n" +
+                    "        <option value=\"2.5\">2,5</option>\n" +
+                    "        <option value=\"3\">3</option>\n" +
+                    "        <option value=\"3.5\">3,5</option>\n" +
+                    "        <option value=\"4\">4</option>\n" +
+                    "        <option value=\"4.5\">4,5</option>\n" +
+                    "        <option value=\"5\">5</option>\n" +
+                    "        <option value=\"5.5\">5,5</option>\n" +
+                    "        <option value=\"6\">6</option>\n" +
+                    "        <option value=\"6.5\">6,5</option>\n" +
+                    "        <option value=\"7\">7</option>\n" +
+                    "        <option value=\"7.5\">7,5</option>\n" +
+                    "        <option value=\"8\">8</option>\n" +
+                    "        <option value=\"8.5\">8,5</option>\n" +
+                    "        <option value=\"9\">9</option>\n" +
+                    "    </select>\n" +
+                    "    <label for=\"CoachCreditBerechnung\">Anzahl Seminartage für Credit-Berechnung</label><br>\n" +
+                    "    <a href=\"#\" class=\"link-small\">Wie ermittle ich die Anzahl der Seminartage?</a>\n" +
+                    "</div>";
+            }
+            else if(document.getElementById('eventCoachStatus').value == "1") {
+                var eventCoachStatus = document.getElementById('coachCreditDays');
+                eventCoachStatus.style.display ='none'
+            }
+        }
+
+        function addITWCredits() {
+            if(document.getElementById('eventITWeducation').value == "2") {
+                var eventCoachStatus = document.getElementById('ITWCreditDays');
+                eventCoachStatus.style.display ='block'
+                document.getElementById("ITWCreditDays").innerHTML = "\n" +
+                    "<div class=\"form-group\">\n" +
+                    "    <input type=\"text\" id=\"ITWCredits\" class=\"form-control member-form-control-styled\"> " +
+                    "    <label for=\"ITWCredits\">Anzahl der ITW-Credits</label><br>\n" +
+                    "    <a href=\"#\" class=\"link-small\">Wie ermittle ich die Anzahl der ITW-Credits?</a>\n" +
+                    "</div>";
+            }
+            else if(document.getElementById('eventITWeducation').value == "1") {
+                var eventCoachStatus = document.getElementById('ITWCreditDays');
+                eventCoachStatus.style.display ='none'
+            }
+        }
+
+        function eventTitleCounter(obj) {
+            var element = document.getElementById('eventTitleCounter');
+            element.innerHTML = 80 - obj.value.length;
+        }
+
+        function eventDescriptionCounter(obj) {
+            var element = document.getElementById('eventDescriptionCounter');
+            element.innerHTML = 2000 - obj.value.length;
+        }
+        $( "form" ).on( "submit", function( event ) {
+            event.preventDefault();
+                console.log( $( this ).serialize() );
+        });
+
+
+    </script>
+{% endblock %}

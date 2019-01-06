@@ -1,12 +1,249 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>{% block title %}{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet" />
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+            <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+        {% endblock %}
+
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <nav class="navbar navbar-default" role="navigation">
+                <div class="container container-nav use-submenu">
+                    <a href="{{path('home')}}" class="logo"><img src="{{ asset('images/logo.svg')}}" alt="Logo"></a>
+                    <div class="wrap">
+                        <div class="navbar-header">
+                            <div class="login-and-contact">
+                                <div class="dropdown login-form">
+                                    {% if is_granted('ROLE_USER') %}
+                                        <div class="parent">
+                                            <div class="div1"><p>Hello {{ app.user.username }}!</p></div>
+                                            <div><a class="logout-btn" href="{{path('fos_user_security_logout')}}" id="authBtn">Logout</a></div>
+                                        </div>
+                                    {% else %}
+                                        <a href="{{ path('fos_user_security_login') }}" id="authBtn" class="login">Login</a>
+                                        {{ include('login_form_on_hover.html.twig') }}
+                                    {% endif %} 
+                                </div>
+                                {% if not is_granted('ROLE_USER')%}
+                                    <a href="#" class="contact">Kontakt</a>
+                                {% endif %}
+                            </div>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#small-menu">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse" id="small-menu">
+                            <ul class="nav navbar-nav" id="main-list">
+                                <li><a href="{{path('home')}}" class="{{ app.request.get('_route') == 'home' ? 'active' }}">HOME</a></li>
+                                <li class="dropdown">
+                                    <a href="{{ path('normal-content-page') }}" class="{{ app.request.get('_route') == 'normal-content-page' ? 'active' }}">THE WORK</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('normal-content-page') }}">Anleitung</a></li>
+                                        <li><a href="#">Über Byron Katie</a></li>
+                                        <li><a href="#">Videos</a></li>
+                                        <li>
+                                            <a href="{{ path('publications')}}">Publikationen</a>
+                                            <ul>
+                                                <li><a href="#">Das kleine buch</a></li>
+                                                <li><a href="#">Autor Byron Katie</a></li>
+                                                <li><a href="#">Vtw autoren</a></li>
+                                                <li><a href="#">Detail pub-seite</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">The work Helpline</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">VERBAND</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Nachrichten</a>
+                                            <ul>
+                                                <li><a href="#">Newsletterformular</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Über vtw</a>
+                                            <ul>
+                                                <li><a href="#">Broschüre</a></li>
+                                                <li><a href="#">Satzung</a></li>
+                                                <li><a href="#">Ethische aussage</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{{ path('register') }}">Mitglied werden</a></li>
+                                        <li>
+                                            <a href="#">Organigramm</a>
+                                            <ul>
+                                                <li><a href="#">Körper</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Drücken Sie</a>
+                                            <ul>
+                                                <li><a href="#">Archiv</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="{{ path('main') }}" class="{{ app.request.get('_route') == 'main' ? 'active' }}">MITGLIEDER</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Mitgliederübersicht</a>
+                                            <ul>
+                                                <li><a href="#">Detail mitgliedsseite</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Vtw Engel</a>
+                                            <ul>
+                                                <li><a href="#">Werde Vtw engel</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('main') }}">Mein vtw Cockpit</a>
+                                            <ul>
+                                                <li><a href="#">Mitgliedsprofil</a></li>
+                                                <li><a href="#">Buddy-programm</a></li>
+                                                <li><a href="#">Veranstaltungen</a></li>
+                                                <li><a href="#">Veröffentlichungen</a></li>
+                                                <li><a href="#">Aufträge</a></li>
+                                                <li><a href="#">Downloads</a></li>
+                                                <li><a href="#">Persönliche daten</a></li>
+                                                <li><a href="#">Mitgliedsstatus</a></li>
+                                                <li><a href="#">Regionale gruppen</a></li>
+                                                <li><a href="#">Vtw engel: zu tun</a></li>
+                                                <li><a href="#">Forum</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">FÜR ORGANISATIONEN</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">The Work in institution</a></li>
+                                        <li><a href="#">The Work im geschäft</a></li>
+                                        <li><a href="#">The Work in medien</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">AUSBILDUNG</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Qualitätskontrolle</a></li>
+                                        <li><a href="#">Anforderungen coach</a></li>
+                                        <li><a href="#">Anforderungen lehrcoach</a></li>
+                                        <li><a href="#">Prinzipien für moderatoren</a></li>
+                                        <li><a href="#">Daten der Formation</a></li>
+                                        <li><a href="#">Ausbildung trainer</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">INSPIRATIONEN</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Vtw glücksbringer</a></li>
+                                        <li>
+                                            <a href="#">Zitate</a>
+                                            <ul>
+                                                <li><a href="#">Sende the Work</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Testimonials</a></li>
+                                        <li><a href="#">Übungen</a></li>
+                                        <li><a href="#">The Work in der welt</a></li>
+                                        <li><a href="#">Freunde in the Work</a></li>
+                                        <li><a href="#">Geschichten</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="{{ path('events') }}" class="{{ app.request.get('_route') == 'events' ? 'active' }}">VERANSTALTUNGEN</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Mit Byron Katie</a></li>
+                                        <li>
+                                            <a href="#">The Work sommer camp</a>
+                                            <ul>
+                                                <li><a href="#">Programm</a></li>
+                                                <li><a href="#">Registrieren</a></li>
+                                                <li><a href="#">Stipendium</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">The Work forum</a></li>
+                                        <li>
+                                            <a href="#">Mitgliederversammlung</a>
+                                            <ul>
+                                                <li><a href="#">Generalversammlung</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Gruppen öffnen</a></li>
+                                        <li>
+                                            <a href="#">Mit vtw-mitglieder</a>
+                                            <ul>
+                                                <li><a href="#">Detailereignisseite</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Feedback-Ereignisse</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="search"></div>
+                </div>
+            </nav>
+
+        {% block body %}
+            <!--Some data ...-->
+        {% endblock %}
+
+            <footer>
+                <div class="container">
+                    <div>
+                        <p>Der vtw in Social Media: Folge uns und bleib immer auf den neusten Stand!</p>
+                    </div>
+                    <div class="icons">
+                        <a href="#">
+                            <div class="m-icon icon-twitter"></div>
+                        </a>
+                        <a href="#">
+                            <div class="m-icon icon-facebook-official"></div>
+                        </a>
+                        <a href="#">
+                            <div class="m-icon icon-youtube-play"></div>
+                        </a>
+                    </div>
+                    <div>
+                        <ul>
+                            <li><a href="#">IMPRESSUM</a></li>
+                            <li><a href="#">DATENSCHUTZ</a></li>
+                            <li><a href="#">SITEMAP</a></li>
+                            <li><a href="#">DOWNLOADS</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">NEWSLETTER</a></li>
+                            <li><a href="#">thework.com/de</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="#">© vtw </a>|
+                        <a href="#">Verband für The Work of Byron Katie </a>|
+                        <a href="#">2018</a>
+
+                    </div>
+                </div>
+            </footer>
+
+        {% block javascripts %}
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="{{ asset('scripts/app.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

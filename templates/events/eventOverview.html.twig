@@ -1,0 +1,1082 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}Veranstaltungsübersicht{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+
+<div class="block block-member-profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        {{ include('side-menu.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-9 col-md-9 overflowX-hidden">
+                <h1 class="col-md-12 title-bold">Veranstaltungen</h1>
+                <div class="col-md-12 member-profile">
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12">
+                            <div class="member-profile-caption">Veranstaltungen erstellen, bearbeiten und löschen</div>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12 pb0">
+                            <div class="member-profile-caption">Veranstaltungen erstellen</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="">
+                            <div class="">
+                                Hier kannst du deine Veranstaltungsangebote zu The Work of Byron Katie einstellen. Sie erscheinen dann unter
+                                dem jeweiligen Datum in unserer Terminübersicht. Die auf der vtw-Website angezeigten Veranstaltungen müssen
+                                folgenden Kriterien entsprechen:
+                                <ul class="overviwe-list">
+                                    <li>Es geht schwerpunktmäßig um The Work of Byron Katie.</li>
+                                    <li>Andere Inhalte (z. B. Meditation, Yoga, Tanz, Wandern) haben eine untergeordnete Bedeutung.</li>
+                                    <li>Andere Interventionsmethoden (z. B. NLP, Familienstellen, Psychotherapie) kommen nicht vor.</li>
+                                    <li>Du verwendest The Work im Sinne von Byron Katie und belässt die vier Fragen und die Umkehrungen intakt.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="profile%20_events_form.html" class="link-button memmberProfile-submit mb0" style="font-size: 16px;">Neue Veranstaltung erstellen</a>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12">
+                            <div class="member-profile-caption">Deine nächsten Veranstaltungen</div>
+                        </div>
+                        <div class="col-md-12 futureEventsTable-box">
+                            <table id="futureEventsTable" class="table tbl" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>DATUM</th>
+                                    <th>TITEL</th>
+                                    <th>ANBIETERIN</th>
+                                    <th>ART</th>
+                                    <th>LAND</th>
+                                    <th>PLZ</th>
+                                    <th>ORT</th>
+                                    <th>PREIS</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="date background-image0">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td class=" background-image0">
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns  background-image0">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class=" background-image0">
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td class=" background-image0">
+                                        DE
+                                    </td>
+                                    <td class=" background-image0">
+                                        201765
+                                    </td>
+                                    <td class=" background-image0">
+                                        Hamburg
+                                    </td>
+                                    <td class=" background-image0">
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="member-profile-section col-md-12">
+                        <div class="col-md-12">
+                            <div class="member-profile-caption">Dein Veranstaltungsarchiv</div>
+                        </div>
+                        <div class="col-md-12 futureEventsTable-box">
+                            <table id="pastEventsTable" class="table tbl" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>DATUM</th>
+                                    <th>TITEL</th>
+                                    <th>ANBIETERIN</th>
+                                    <th>ART</th>
+                                    <th>LAND</th>
+                                    <th>PLZ</th>
+                                    <th>ORT</th>
+                                    <th>PREIS</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="date background-image0">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td class=" background-image0">
+                                        <div class="event">
+                                            <a href="#" class="event-title" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns  background-image0">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class=" background-image0">
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td class=" background-image0">
+                                        DE
+                                    </td>
+                                    <td class=" background-image0">
+                                        201765
+                                    </td>
+                                    <td class=" background-image0">
+                                        Hamburg
+                                    </td>
+                                    <td class=" background-image0">
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="date">
+                                        20.01.2019-
+                                        16.01.2019</td>
+                                    <td>
+                                        <div class="event">
+                                            <a href="#" class="event-title">AUSBILDUNG COACH FOR THE WORK TEIL 1</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                        </div>
+                                    </td>
+                                    <td class="futureEvents-btns">
+                                        <div class="avatar-wrap">
+                                            <img src="./images/avatar.png" alt="">
+                                            <div>
+                                                <img src="./images/lehrcoach.svg" alt="" class="vacancy">
+                                                <div class="bukv">
+                                                    <div class="bukv-a">A</div>
+                                                    <div class="bukv-cr">CR</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                <a href="#" class="small-button" name="copyEvent">duplizieren</a>
+                                                <a href="#" class="small-button" name="deleteEvent">löschen</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ausbildung
+                                        Modul/Teil 1
+                                    </td>
+                                    <td>
+                                        DE
+                                    </td>
+                                    <td>
+                                        201765
+                                    </td>
+                                    <td>
+                                        Hamburg
+                                    </td>
+                                    <td>
+                                        850€
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#futureEventsTable').DataTable( {
+                "paging":   false,
+                "info":     false,
+                "filter":   false,
+                "scrollX": true
+            } );
+        } );
+        $(document).ready(function() {
+            $('#pastEventsTable').DataTable( {
+                "info":     false,
+                "filter":   false,
+                "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+                "scrollX": true,
+                "language": {
+                    "paginate": {
+                        "previous": "Vorherige",
+                        "next": "Nächste"
+                    }
+                }
+            } );
+        } );
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                if(input.files[0].size > 100000){
+                    alert("File is too big!");
+                }
+                else
+                    reader.onload = function (e) {
+                        $('#Profile-avatar').attr('src', e.target.result);
+                    }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#profileImg").change(function(){
+            readURL(this);
+        });
+
+        function  checkLink() {
+            var videoLink = document.getElementById("profile-video").value;
+            var cutLink = videoLink.split('be/')[1];
+            var getSrcObject = document.getElementById("youtube-iframe");
+            getSrcObject.src = getSrcObject.src.replace("https://www.youtube.com/embed/06FIcXpZiSU", "https://www.youtube.com/embed/" + cutLink);
+        }
+
+        $( "form" ).on( "submit", function( event ) {
+            event.preventDefault();
+            var flag = false;
+            $(".form-group").find(">input").each(function(index, el){
+                if ($(el).val().length == '')
+                    flag = true;
+            });
+            if( !flag )
+                console.log( $( this ).serialize() );
+            /*        axios.post('http://localhost:8081/', str)
+                        .then((response) => {
+                            console.log(response);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });*/
+        });
+    </script>
+{% endblock %}
