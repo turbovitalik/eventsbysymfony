@@ -1,14 +1,14 @@
 <div class="event-section">
     <div class="profile-nav">
         <ul>
-            <li><a class="{{ app.request.get('_route') == 'member-profile' ? 'selected' }}" href="{{path('member-profile')}}">mitgliedsprofil</a></li>
-            <li><a class="{{ app.request.get('_route') == 'my-to-dos' ? 'selected' }}" href="{{ path('my-to-dos') }}">meine aufgaben</a></li>
-            <li><a class="{{ app.request.get('_route') == 'member-status' ? 'selected' }}" href="{{ path('member-status') }}">mein mitgliedsstatus</a></li>
-            <li><a class="{{ app.request.get('_route') == 'buddy-program' ? 'selected' }}" href="{{ path('buddy-program') }}">the-work-budy-programm</a></li>
-            <li><a class="{{ app.request.get('_route') == '141-program' ? 'selected' }}" href="{{ path('141-program') }}">partner-übungsprogramm</a></li>
-            <li><a class="{{ app.request.get('_route') == 'event-overview' ? 'selected' }}" href="{{ path('event-overview') }}">meine veranstaltungen</a> <span>4</span></li>
-            <li><a class="{{ app.request.get('_route') == 'publications-overview' ? 'selected' }}" href="{{ path('publications-overview') }}">meine publikationen</a> <span>1</span></li>
-            <li><a class="{{ app.request.get('_route') == 'my-stories' ? 'selected' }}" href="{{ path('my-stories') }}">meine storys</a> <span>2</span></li>
+            <li><a class="{{ app.request.get('_route') == 'member-profile' ? 'selected' }}" href="#">mitgliedsprofil</a></li>
+            <li><a class="{{ app.request.get('_route') == 'my-to-dos' ? 'selected' }}" href="#">meine aufgaben</a></li>
+            <li><a class="{{ app.request.get('_route') == 'member-status' ? 'selected' }}" href="#">mein mitgliedsstatus</a></li>
+            <li><a class="{{ app.request.get('_route') == 'buddy-program' ? 'selected' }}" href="#">the-work-budy-programm</a></li>
+            <li><a class="{{ app.request.get('_route') == '141-program' ? 'selected' }}" href="#">partner-übungsprogramm</a></li>
+            <li><a class="{{ app.request.get('_route') == 'event-overview' ? 'selected' }}" href="#">meine veranstaltungen</a> <span>4</span></li>
+            <li><a class="{{ app.request.get('_route') == 'publications-overview' ? 'selected' }}" href="#">meine publikationen</a> <span>1</span></li>
+            <li><a class="{{ app.request.get('_route') == 'my-stories' ? 'selected' }}" href="#">meine storys</a> <span>2</span></li>
             <li><a href="#">bestellungen</a></li>
             {% 
                 set routes = [
@@ -27,13 +27,13 @@
                 <li class="dropdown {{ opened == true ? 'open' }}">  
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">downloads</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="{{ app.request.get('_route') == 'downloads' ? 'selected' }}" href="{{ path('downloads') }}">siegel</a></li>
-                    <li><a class="{{ app.request.get('_route') == 'download-protocolle' ? 'selected' }}" href="{{ path('download-protocolle') }}">protocolle</a></li>
-                    <li><a class="{{ app.request.get('_route') == 'download-documents' ? 'selected' }}" href="{{ path('download-documents') }}">übungsunterlagen</a></li>
-                    <li><a class="{{ app.request.get('_route') == 'download-verband' ? 'selected' }}" href="{{ path('download-verband') }}">verband</a></li>
+                    <li><a class="{{ app.request.get('_route') == 'downloads' ? 'selected' }}" href="#">siegel</a></li>
+                    <li><a class="{{ app.request.get('_route') == 'download-protocolle' ? 'selected' }}" href="#">protocolle</a></li>
+                    <li><a class="{{ app.request.get('_route') == 'download-documents' ? 'selected' }}" href="#">übungsunterlagen</a></li>
+                    <li><a class="{{ app.request.get('_route') == 'download-verband' ? 'selected' }}" href="#">verband</a></li>
                 </ul>
             </li>
-            <li><a class="{{ app.request.get('_route') == 'main' ? 'selected' }}" href="{{ path('main') }}">mein vtw-cockpit</a></li>
+            <li><a class="{{ app.request.get('_route') == 'main' ? 'selected' }}" href="#">mein vtw-cockpit</a></li>
         </ul>
     </div>
 </div>

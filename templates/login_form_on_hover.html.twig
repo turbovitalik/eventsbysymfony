@@ -1,8 +1,8 @@
 <div class="dropdown-content">
-    <form class="px-4 py-3" action="{{ path("fos_user_security_check") }}" method="post">
-        {% if csrf() %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf() }}" />
-        {% endif %}
+    <form class="px-4 py-3" action="#" method="post">
+        {#{% if csrf_token() %}#}
+            {#<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />#}
+        {#{% endif %}#}
         <div class="form-group">
             <label for="loginDropdownFormEmail1">E-Mail-Adresse</label>
             <input name="_email" type="email" class="form-control" html-autocomplete="off" id="loginDropdownFormEmail1" placeholder="E-Mail-Adresse*" required>
@@ -13,6 +13,6 @@
         </div>
         <button name="_submit" type="submit" id="loginDropdownFormSubmit" class="btn btn-primary">Login</button>
     </form>
-    <a class="dropdown-item" href="{{path('fos_user_resetting_request')}}">Kennwort vergessen?</a>
-    <a class="dropdown-item" href="{{path('register')}}">Noch kein Mitglied?</a>
+    <a class="dropdown-item" href="#">Kennwort vergessen?</a>
+    <a class="dropdown-item" href="#">Noch kein Mitglied?</a>
 </div>

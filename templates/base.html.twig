@@ -17,7 +17,7 @@
     <body>
         <nav class="navbar navbar-default" role="navigation">
                 <div class="container container-nav use-submenu">
-                    <a href="{{path('home')}}" class="logo"><img src="{{ asset('images/logo.svg')}}" alt="Logo"></a>
+                    <a href="#" class="logo"><img src="{{ asset('images/logo.svg')}}" alt="Logo"></a>
                     <div class="wrap">
                         <div class="navbar-header">
                             <div class="login-and-contact">
@@ -25,10 +25,10 @@
                                     {% if is_granted('ROLE_USER') %}
                                         <div class="parent">
                                             <div class="div1"><p>Hello {{ app.user.username }}!</p></div>
-                                            <div><a class="logout-btn" href="{{path('fos_user_security_logout')}}" id="authBtn">Logout</a></div>
+                                            <div><a class="logout-btn" href="#" id="authBtn">Logout</a></div>
                                         </div>
                                     {% else %}
-                                        <a href="{{ path('fos_user_security_login') }}" id="authBtn" class="login">Login</a>
+                                        <a href="#" id="authBtn" class="login">Login</a>
                                         {{ include('login_form_on_hover.html.twig') }}
                                     {% endif %} 
                                 </div>
@@ -44,15 +44,15 @@
                         </div>
                         <div class="collapse navbar-collapse" id="small-menu">
                             <ul class="nav navbar-nav" id="main-list">
-                                <li><a href="{{path('home')}}" class="{{ app.request.get('_route') == 'home' ? 'active' }}">HOME</a></li>
+                                <li><a href="#" class="{{ app.request.get('_route') == 'home' ? 'active' }}">HOME</a></li>
                                 <li class="dropdown">
-                                    <a href="{{ path('normal-content-page') }}" class="{{ app.request.get('_route') == 'normal-content-page' ? 'active' }}">THE WORK</a>
+                                    <a href="#" class="{{ app.request.get('_route') == 'normal-content-page' ? 'active' }}">THE WORK</a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('normal-content-page') }}">Anleitung</a></li>
+                                        <li><a href="#">Anleitung</a></li>
                                         <li><a href="#">Über Byron Katie</a></li>
                                         <li><a href="#">Videos</a></li>
                                         <li>
-                                            <a href="{{ path('publications')}}">Publikationen</a>
+                                            <a href="#">Publikationen</a>
                                             <ul>
                                                 <li><a href="#">Das kleine buch</a></li>
                                                 <li><a href="#">Autor Byron Katie</a></li>
@@ -80,7 +80,7 @@
                                                 <li><a href="#">Ethische aussage</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{ path('register') }}">Mitglied werden</a></li>
+                                        <li><a href="#">Mitglied werden</a></li>
                                         <li>
                                             <a href="#">Organigramm</a>
                                             <ul>
@@ -96,7 +96,7 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="{{ path('main') }}" class="{{ app.request.get('_route') == 'main' ? 'active' }}">MITGLIEDER</a>
+                                    <a href="#" class="{{ app.request.get('_route') == 'main' ? 'active' }}">MITGLIEDER</a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Mitgliederübersicht</a>
@@ -111,7 +111,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="{{ path('main') }}">Mein vtw Cockpit</a>
+                                            <a href="#">Mein vtw Cockpit</a>
                                             <ul>
                                                 <li><a href="#">Mitgliedsprofil</a></li>
                                                 <li><a href="#">Buddy-programm</a></li>
@@ -165,7 +165,7 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="{{ path('events') }}" class="{{ app.request.get('_route') == 'events' ? 'active' }}">VERANSTALTUNGEN</a>
+                                    <a href="#" class="{{ app.request.get('_route') == 'events' ? 'active' }}">VERANSTALTUNGEN</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Mit Byron Katie</a></li>
                                         <li>
@@ -241,8 +241,8 @@
             </footer>
 
         {% block javascripts %}
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
             <script src="{{ asset('scripts/app.js') }}"></script>
         {% endblock %}
     </body>
