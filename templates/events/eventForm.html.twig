@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-9 col-md-9 overflowX-hidden">
                 <h1 class="col-md-12 title-bold">Veranstaltungen</h1>
-                <form class="col-md-12 profile-events-form" id="profile-events_form" method="post">
+                {#<form class="col-md-12 profile-events-form" id="profile-events_form" method="post">#}
                     <div class="member-profile-section col-md-12">
                         <div class="col-md-12">
                             <div class="member-profile-caption profile-tittle">Neue Veranstaltung erstellen</div>
@@ -34,6 +34,11 @@
                         </div>
                         <div class="col-md-12 pt0">
                             <div class="form-group">
+                                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                                {{ form_row(form.title) }}
+                                {{ form_row(form.description) }}
+                                {{ form_row(form.save) }}
+                                {{ form_end(form) }}
                                 <input type="text" name="Event-Title" class="form-control member-form-control-styled_blank" id="inputEventTitle" onkeyup="eventTitleCounter(this)" maxlength="80">
                                 <label for="inputEventTitle">Noch <span id="eventTitleCounter">80</span> Zeichen übrig</label>
                             </div>
@@ -328,7 +333,6 @@
                             <button type="submit" class="link-button memmberProfile-submit" id="createEventSubmit">Speichern</button>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -572,10 +576,10 @@
             var element = document.getElementById('eventDescriptionCounter');
             element.innerHTML = 2000 - obj.value.length;
         }
-        $( "form" ).on( "submit", function( event ) {
-            event.preventDefault();
-                console.log( $( this ).serialize() );
-        });
+        // $( "form" ).on( "submit", function( event ) {
+        //     event.preventDefault();
+        //         console.log( $( this ).serialize() );
+        // });
 
 
     </script>
