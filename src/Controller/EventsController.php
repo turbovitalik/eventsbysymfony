@@ -39,7 +39,6 @@ class EventsController extends AbstractController
             $em->flush();
 
             return new Response('Event has been saved');
-
         }
 
         return $this->render('events/eventForm.html.twig', [

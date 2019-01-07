@@ -1,5 +1,7 @@
 {% extends 'base.html.twig'%}
 
+{% form_theme form 'form/fields.html.twig' %}
+
 {% block title %}Veranstaltung erstellen{% endblock %}
 
 {% block stylesheets %}
@@ -22,7 +24,9 @@
             </div>
             <div class="col-lg-9 col-md-9 overflowX-hidden">
                 <h1 class="col-md-12 title-bold">Veranstaltungen</h1>
-                {#<form class="col-md-12 profile-events-form" id="profile-events_form" method="post">#}
+                {#<form novalidate class="col-md-12 profile-events-form" id="profile-events_form" method="post">#}
+                    {{ form_start(form) }}
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-item') }}" />
                     <div class="member-profile-section col-md-12">
                         <div class="col-md-12">
                             <div class="member-profile-caption profile-tittle">Neue Veranstaltung erstellen</div>
@@ -34,13 +38,9 @@
                         </div>
                         <div class="col-md-12 pt0">
                             <div class="form-group">
-                                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                                {{ form_row(form.title) }}
-                                {{ form_row(form.description) }}
-                                {{ form_row(form.save) }}
-                                {{ form_end(form) }}
-                                <input type="text" name="Event-Title" class="form-control member-form-control-styled_blank" id="inputEventTitle" onkeyup="eventTitleCounter(this)" maxlength="80">
+                                <input name="event[title]" type="text" class="form-control member-form-control-styled_blank" id="inputEventTitle" onkeyup="eventTitleCounter(this)" maxlength="80">
                                 <label for="inputEventTitle">Noch <span id="eventTitleCounter">80</span> Zeichen übrig</label>
+                                {{ form_errors(form.title) }}
                             </div>
                         </div>
                     </div>
@@ -50,8 +50,9 @@
                         </div>
                         <div class="col-md-12 pt0">
                             <div class="form-group">
-                                <textarea type="text" rows="10" style="font-weight: 100!important;" name="Event-Title-Description" class="form-control member-form-control-styled_blank" id="inputDescriptionTitle" onkeyup="eventDescriptionCounter(this)" maxlength="2000" placeholder="Bitte gib hier deine Veranstaltungsbeschreibung ein."></textarea>
+                                <textarea name="event[description]" type="text" rows="10" style="font-weight: 100!important;" class="form-control member-form-control-styled_blank" id="inputDescriptionTitle" onkeyup="eventDescriptionCounter(this)" maxlength="2000" placeholder="Bitte gib hier deine Veranstaltungsbeschreibung ein."></textarea>
                                 <label for="eventDescriptionCounter">Noch <span id="eventDescriptionCounter">2000</span> Zeichen übrig</label>
+                                {{ form_errors(form.title) }}
                             </div>
                         </div>
                     </div>
@@ -167,14 +168,10 @@
                         <div class="col-md-12">
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group" style="display:grid;">
-                                    <select name="Event-Type" class="form-control member-form-control-styled member-profile-visibility" id="eventType">
-                                        <option value="0">Abendveranstaltung</option>
-                                        <option value="1">Ausbildung</option>
-                                        <option value="2">Fortlaufender Kurs</option>
-                                        <option value="3">Mehrtägiges Seminar</option>
-                                        <option value="4">Online-Programm</option>
-                                        <option value="5">Tagesseminar</option>
-                                        <option value="6">Vortrag</option>
+                                    <select name="event[type]" class="form-control member-form-control-styled member-profile-visibility" id="eventType">
+                                        {% for choice in form.type.vars.choices %}
+                                            <option value="{{ choice.data.id }}">{{ choice.data.title }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo mt5"></i>
                                     <label for="eventType">Veranstaltungsart</label>
@@ -290,9 +287,9 @@
                         <div class="col-md-12">
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <select name="Event-knowledge-necessary" class="form-control member-form-control-styled" id="eventKnowledgeNecessary">
-                                        <option value="1">Nein</option>
-                                        <option value="2">Ja</option>
+                                    <select name="{{ form.priorKnowledge.vars.full_name }}" class="form-control member-form-control-styled" id="eventKnowledgeNecessary">
+                                        <option value="0">Nein</option>
+                                        <option value="1">Ja</option>
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventKnowledgeNecessary">Vorkenntnisse erforderlich?</label>
@@ -300,9 +297,9 @@
                             </div>
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <select name="Event-coach-status" class="form-control member-form-control-styled" id="eventCoachStatus" onchange="addCoachStatus();">
-                                        <option value="1">Nein</option>
-                                        <option value="2">Ja</option>
+                                    <select name="{{ form.coach.vars.full_name }}" class="form-control member-form-control-styled" id="eventCoachStatus" onchange="addCoachStatus();">
+                                        <option value="0">Nein</option>
+                                        <option value="1">Ja</option>
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventCoachStatus">Anerkannt für Ausbildung zum Coach (vtw)?</label>
@@ -310,9 +307,9 @@
                             </div>
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <select name="Event-ITW-education" class="form-control member-form-control-styled" id="eventITWeducation" onchange="addITWCredits();">
-                                        <option value="1">Nein</option>
-                                        <option value="2">Ja</option>
+                                    <select name="{{ form.education.vars.full_name }}" class="form-control member-form-control-styled" id="eventITWeducation" onchange="addITWCredits();">
+                                        <option value="0">Nein</option>
+                                        <option value="1">Ja</option>
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventITWeducation">Anerkannt für ITW-Credits?</label>
@@ -333,6 +330,8 @@
                             <button type="submit" class="link-button memmberProfile-submit" id="createEventSubmit">Speichern</button>
                         </div>
                     </div>
+                {#</form>#}
+                {#{{ form_end(form) }}#}
             </div>
         </div>
     </div>

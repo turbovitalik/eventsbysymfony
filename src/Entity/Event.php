@@ -103,7 +103,7 @@ class Event
     /**
      * @param int $priorKnowledge
      */
-    public function setPriorKnowledge(int $priorKnowledge): void
+    public function setPriorKnowledge($priorKnowledge): void
     {
         $this->priorKnowledge = $priorKnowledge;
     }
@@ -119,7 +119,7 @@ class Event
     /**
      * @param int $coach
      */
-    public function setCoach(int $coach): void
+    public function setCoach($coach): void
     {
         $this->coach = $coach;
     }
@@ -135,7 +135,7 @@ class Event
     /**
      * @param int $education
      */
-    public function setEducation(int $education): void
+    public function setEducation($education): void
     {
         $this->education = $education;
     }
@@ -143,7 +143,7 @@ class Event
     /**
      * @return Type
      */
-    public function getType(): Type
+    public function getType()
     {
         return $this->type;
     }
