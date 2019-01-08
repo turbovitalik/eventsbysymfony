@@ -53,6 +53,18 @@ class Event
     private $education = 0;
 
     /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
+     */
+    private $endDate;
+
+    /**
      * @return int
      */
     public function getId()
@@ -154,5 +166,37 @@ class Event
     public function setType(Type $type): void
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param mixed $startDate
+     */
+    public function setStartDate($startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate): void
+    {
+        $this->endDate = $endDate;
     }
 }

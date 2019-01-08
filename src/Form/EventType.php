@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Event;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,6 +26,16 @@ class EventType extends AbstractType
             ->add('priorKnowledge', TextType::class)
             ->add('coach', TextType::class)
             ->add('education', TextType::class)
+            ->add('startDate', DateType::class, [
+                'required' => true,
+                'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy',
+            ])
+            ->add('endDate', DateType::class, [
+                'required' => true,
+                'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy',
+            ])
             ->add('save', SubmitType::class);
     }
 
