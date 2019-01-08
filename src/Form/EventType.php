@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Event;
+use App\Form\DataTransformer\TrainerTypeTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -14,6 +16,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
 {
+    private $trainerDataTransformer;
+
+    public function __construct(TrainerTypeTransformer $trainerDataTransformer)
+    {
+        $this->trainerDataTransformer = $trainerDataTransformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -36,7 +45,16 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'MM/dd/yyyy',
             ])
+            ->add('trainers',CollectionType::class, [
+                'entry_type' => TextType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
+            ->add('location', LocationType::class)
             ->add('save', SubmitType::class);
+
+        $builder->get('trainers')
+            ->addModelTransformer($this->trainerDataTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

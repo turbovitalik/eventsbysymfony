@@ -118,7 +118,7 @@
                                             {{ event.endDate|date('m.d.Y') }}</td>
                                         <td>
                                             <div class="event">
-                                                <a href="#" class="event-title">{{ event.title }}</a> mit <a href="#">Christiane Habiba Pierau</a>
+                                                <a href="#" class="event-title">{{ event.title }}</a> mit <a href="#">{{ event.trainers[0].user.fullName }}</a>
                                             </div>
                                         </td>
                                         <td class="futureEvents-btns">
@@ -143,7 +143,7 @@
                                             Modul/Teil 1
                                         </td>
                                         <td>
-                                            DE
+                                            {{ event.location.country }}
                                         </td>
                                         <td>
                                             201765
@@ -210,7 +210,7 @@
                                             Modul/Teil 1
                                         </td>
                                         <td>
-                                            DE
+                                            {{ event.location.country }}
                                         </td>
                                         <td>
                                             201765

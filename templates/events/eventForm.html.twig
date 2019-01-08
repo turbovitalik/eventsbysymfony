@@ -71,7 +71,7 @@
                             <div class="col-md-6 member-profile-section_part">
                                 <div class="member-profile-caption col-md-12">AnbieterIn hinzufügen</div>
                                 <div class="col-md-6 member-profile-section_part">
-                                    <input name="AnotherTrainer" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
+                                    <input name="{{ form.trainers.vars.full_name }}[0]" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
                                 </div>
                                 <div class="col-md-6 pl-xs-0 pt-xs-15  pl-sm-0 pt-sm-15 d-sm-inline-table">
                                     <button type="button" name="Add-Trainer" id="addTrainer"  class="btn btn-main" data-container="body" data-toggle="popover" data-placement="top" data-html="true">
@@ -79,12 +79,9 @@
                                     </button>
                                     <div id="popover-content-addTrainer" class="hide">
                                         <select class="list-group add-trainer-list"  multiple="multiple">
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 0">Trainer Name 0</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 1">Trainer Name 1</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 2">Trainer Name 2</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 3">Trainer Name 3</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 4">Trainer Name 4</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="Trainer Name 5">Trainer Name 5</option>
+                                            {% for trainer in trainers %}
+                                                <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="{{ trainer.id }}">{{ trainer.fullName }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
@@ -237,36 +234,36 @@
                         <div class="col-md-12">
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <input name="Event-place" class="form-control member-form-control-styled_blank" id="eventPlace" placeholder="Volkshochschule">
+                                    <input name="{{ form.location.place.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventPlace" placeholder="Volkshochschule">
                                     <label for="eventPlace">Firma / Institution</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="Event-address" class="form-control member-form-control-styled_blank" id="eventAddress" placeholder="Jungfernstieg 17">
+                                    <input name="{{ form.location.streetAddress.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventAddress" placeholder="Jungfernstieg 17">
                                     <label for="eventAddress">Straße und Hausnummer</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="Event-town" class="form-control member-form-control-styled_blank" id="eventTown" placeholder="Hamburg">
+                                    <input name="{{ form.location.city.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventTown" placeholder="Hamburg">
                                     <label for="eventTown">Ort</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="Event-website" class="form-control member-form-control-styled_blank" id="eventWebSite" placeholder="https://www.vhs-hamburg.de/sdkas">
+                                    <input name="{{ form.location.website.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventWebSite" placeholder="https://www.vhs-hamburg.de/sdkas">
                                     <label for="eventWebSite">Website für weltere infos zur Veranstaltung</label>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <input name="Event-address2" class="form-control member-form-control-styled_blank" id="eventAddres2" placeholder="Haus 7, Raum 234 ">
+                                    <input name="{{ form.location.extraInfo.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventAddres2" placeholder="Haus 7, Raum 234 ">
                                     <label for="eventAddres2">Adresszusatz</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="Event-zip-code" class="form-control member-form-control-styled_blank" id="eventZipCode" placeholder="21654">
+                                    <input name="{{ form.location.postalCode.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventZipCode" placeholder="21654">
                                     <label for="eventZipCode">Postleitzahl</label>
                                 </div>
                                 <div class="form-group" style="display: grid;">
-                                    <select name="Event-country" class="form-control member-form-control-styled member-profile-visibility" id="eventCountry">
-                                    <option value="0">Deutschland</option>
-                                    <option value="1">some country</option>
-                                    <option value="2">some country</option>
+                                    <select name="event[location][country]" class="form-control member-form-control-styled member-profile-visibility" id="eventCountry">
+                                        {% for choice in form.location.country.vars.choices %}
+                                            <option value="{{ choice.data }}">{{ choice.label }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo mt5"></i>
                                     <label for="eventCountry">Land</label>

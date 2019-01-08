@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Event\Type;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -63,6 +64,22 @@ class Event
      * @Assert\NotBlank
      */
     private $endDate;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="EventTrainer", inversedBy="trainers" ,cascade={"persist"})
+     */
+    private $trainers;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", cascade={"persist"})
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=true)
+     */
+    private $location;
+
+    public function __construct()
+    {
+        $this->trainers = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -198,5 +215,40 @@ class Event
     public function setEndDate($endDate): void
     {
         $this->endDate = $endDate;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTrainers()
+    {
+        return $this->trainers;
+    }
+
+    public function addTrainer(EventTrainer $trainer)
+    {
+        $trainer->addEvent($this);
+        $this->trainers[] = $trainer;
+    }
+
+    public function setTrainers($trainers)
+    {
+        $this->trainers = $trainers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location): void
+    {
+        $this->location = $location;
     }
 }
