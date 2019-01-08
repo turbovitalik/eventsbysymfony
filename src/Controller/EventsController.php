@@ -12,11 +12,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventsController extends AbstractController
 {
     /**
-     * @Route("/index")
+     * @Route("/events")
      */
     public function index()
     {
-        return $this->render('events/eventForm.html.twig', []);
+        $em = $this->getDoctrine()->getManager();
+
+
+        $now = new \DateTime('now');
+
+        $futureEvents = $em->getRepository(Event::class)->findEventsStartAfter($now);
+        $pastEvents = $em->getRepository(Event::class)->findEventsStartBefore($now);
+
+        return $this->render('events/eventOverview.html.twig', [
+            'futureEvents' => $futureEvents,
+            'pastEvents' => $pastEvents,
+        ]);
     }
 
     /**
