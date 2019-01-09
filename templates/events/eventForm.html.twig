@@ -201,9 +201,10 @@
                         <div class="col-md-12">
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <select name="Event-costs" class="form-control member-form-control-styled" id="eventCosts">
-                                        <option value="1">Preis fix</option>
-                                        <option value="2">Preis ab</option>
+                                    <select name="{{ form.priceType.vars.full_name }}" class="form-control member-form-control-styled" id="eventCosts">
+                                        {% for choice in form.priceType.vars.choices %}
+                                            <option value="{{ choice.data }}">{{ choice.label }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventCosts">Kostenstaffelung</label>
@@ -211,15 +212,16 @@
                             </div>
                             <div class="col-lg-2 col-md-2 member-profile-section_part">
                                 <div class="form-group">
-                                    <input name="Event-price" type="number" class="form-control member-form-control-styled_blank" id="eventPrice" placeholder="350">
+                                    <input name="{{ form.price.vars.full_name }}" type="number" class="form-control member-form-control-styled_blank" id="eventPrice" placeholder="350">
                                     <label for="eventPrice">Kosten</label>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 member-profile-section_part">
                                 <div class="form-group">
-                                    <select name="Event-currency" class="form-control member-form-control-styled" id="eventCurrency">
-                                    <option value="1">EUR</option>
-                                    <option value="2">CHF</option>
+                                    <select name="{{ form.currency.vars.full_name }}" class="form-control member-form-control-styled" id="eventCurrency">
+                                        {% for choice in form.currency.vars.choices %}
+                                            <option value="{{ choice.data }}">{{ choice.label }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventCurrency">Währung</label>

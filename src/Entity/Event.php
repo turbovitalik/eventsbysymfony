@@ -12,6 +12,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
+    const PRICE_TYPE_FIXED = 'visible';
+    const PRICE_TYPE_MIN = 'min';
+
+    const EUR_CURRENCY = 'EUR';
+    const CHF_CURRENCY = 'CHF';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue
@@ -75,6 +81,22 @@ class Event
      * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=true)
      */
     private $location;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $priceType;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $currency;
 
     public function __construct()
     {
@@ -250,5 +272,64 @@ class Event
     public function setLocation($location): void
     {
         $this->location = $location;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriceType()
+    {
+        return $this->priceType;
+    }
+
+    /**
+     * @param $type
+     */
+    public function setPriceType($type)
+    {
+        if (!in_array($type, array(self::PRICE_TYPE_FIXED, self::PRICE_TYPE_MIN))) {
+            throw new \InvalidArgumentException("Invalid price type");
+        }
+        $this->priceType = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getDisplayPrice()
+    {
+        return $this->price / 100;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price): void
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param mixed $currency
+     */
+    public function setCurrency($currency): void
+    {
+        if (!in_array($currency, array(self::EUR_CURRENCY, self::CHF_CURRENCY))) {
+            throw new \InvalidArgumentException("Invalid price currency");
+        }
+        $this->currency = $currency;
     }
 }

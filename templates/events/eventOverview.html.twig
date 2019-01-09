@@ -139,20 +139,19 @@
                                             </div>
                                         </td>
                                         <td>
-                                            Ausbildung
-                                            Modul/Teil 1
+                                            {{ event.type.title }}
                                         </td>
                                         <td>
                                             {{ event.location.country }}
                                         </td>
                                         <td>
-                                            201765
+                                            {{ event.location.postalCode }}
                                         </td>
                                         <td>
-                                            Hamburg
+                                            {{ event.location.city }}
                                         </td>
                                         <td>
-                                            850€
+                                            {{ event.getDisplayPrice() }}{{ event.currency }}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -206,20 +205,19 @@
                                             </div>
                                         </td>
                                         <td>
-                                            Ausbildung
-                                            Modul/Teil 1
+                                            {{ event.type.title }}
                                         </td>
                                         <td>
                                             {{ event.location.country }}
                                         </td>
                                         <td>
-                                            201765
+                                            {{ event.location.postalCode }}
                                         </td>
                                         <td>
-                                            Hamburg
+                                            {{ event.location.city }}
                                         </td>
                                         <td>
-                                            850€
+                                            {{ event.getDisplayPrice() }}{{ event.currency }}
                                         </td>
                                     </tr>
                                 {% endfor %}

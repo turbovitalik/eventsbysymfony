@@ -6,8 +6,10 @@ use App\Entity\Event;
 use App\Form\DataTransformer\TrainerTypeTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -51,6 +53,21 @@ class EventType extends AbstractType
                 'allow_delete' => true,
             ])
             ->add('location', LocationType::class)
+            ->add('priceType', ChoiceType::class, [
+                'choices' => [
+                    'Preis fix' => 'fixed',
+                    'Preis ab' => 'min',
+                ]
+            ])
+            ->add('price', MoneyType::class, [
+                'divisor' => 100,
+            ])
+            ->add('currency', ChoiceType::class, [
+                'choices' => [
+                    'EUR' => 'EUR',
+                    'CHF' => 'CHF',
+                ]
+            ])
             ->add('save', SubmitType::class);
 
         $builder->get('trainers')
