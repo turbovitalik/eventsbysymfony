@@ -85,4 +85,17 @@ class EventsController extends AbstractController
             'trainers' => $trainers,
         ]);
     }
+
+    /**
+     * @Route("/events/delete/{id}", name="delete_event")
+     */
+    public function delete(Event $event)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($event);
+        $em->flush();
+
+        return $this->redirect('/events');
+    }
 }
