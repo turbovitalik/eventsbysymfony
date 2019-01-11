@@ -132,7 +132,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <a href="#" class="small-button" name="editEvent">bearbeiten</a>
+                                                    <a href="{{ path('edit_event', {id: event.id}) }}" class="small-button" name="editEvent">bearbeiten</a>
                                                     <a href="#" class="small-button" name="copyEvent">duplizieren</a>
                                                     <a href="{{ path('delete_event', {id: event.id}) }}" class="small-button" name="deleteEvent">löschen</a>
                                                 </div>

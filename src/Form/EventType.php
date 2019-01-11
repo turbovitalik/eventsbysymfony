@@ -34,9 +34,24 @@ class EventType extends AbstractType
                 'class' => Event\Type::class,
                 'choice_label' => 'title',
             ])
-            ->add('priorKnowledge', TextType::class)
-            ->add('coach', TextType::class)
-            ->add('education', TextType::class)
+            ->add('priorKnowledge', ChoiceType::class, [
+                'choices' => [
+                    'Nein' => '0',
+                    'Ya' => '1',
+                ],
+            ])
+            ->add('coach', ChoiceType::class, [
+                'choices' => [
+                    'Nein' => '0',
+                    'Ya' => '1',
+                ],
+            ])
+            ->add('education', ChoiceType::class, [
+                'choices' => [
+                    'Nein' => '0',
+                    'Ya' => '1',
+                ],
+            ])
             ->add('startDate', DateType::class, [
                 'required' => true,
                 'widget' => 'single_text',

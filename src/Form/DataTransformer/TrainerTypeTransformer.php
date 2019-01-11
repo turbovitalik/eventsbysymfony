@@ -4,6 +4,7 @@ namespace App\Form\DataTransformer;
 
 use App\Entity\EventTrainer;
 use App\Entity\User;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -44,11 +45,23 @@ class TrainerTypeTransformer implements DataTransformerInterface
      *
      * @throws TransformationFailedException when the transformation fails
      */
-    public function transform($trainer)
+    public function transform($collection)
     {
-        if (null === $trainer) {
+        if (null === $collection) {
             return '';
         }
+
+        // For cases when the collection getter returns $collection->toArray()
+        // in order to prevent modifications of the returned collection
+        if (\is_array($collection)) {
+            return $collection;
+        }
+
+        if (!$collection instanceof Collection) {
+            throw new TransformationFailedException('Expected a Doctrine\Common\Collections\Collection object.');
+        }
+
+        return $collection->toArray();
     }
 
     /**

@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-md-12 pt0">
                             <div class="form-group">
-                                <input name="event[title]" type="text" class="form-control member-form-control-styled_blank" id="inputEventTitle" onkeyup="eventTitleCounter(this)" maxlength="80">
+                                <input value="{{ form.title.vars.value }}" name="{{ form.title.vars.full_name }}" type="text" class="form-control member-form-control-styled_blank" id="inputEventTitle" onkeyup="eventTitleCounter(this)" maxlength="80">
                                 <label for="inputEventTitle">Noch <span id="eventTitleCounter">80</span> Zeichen übrig</label>
                                 {{ form_errors(form.title) }}
                             </div>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-md-12 pt0">
                             <div class="form-group">
-                                <textarea name="event[description]" type="text" rows="10" style="font-weight: 100!important;" class="form-control member-form-control-styled_blank" id="inputDescriptionTitle" onkeyup="eventDescriptionCounter(this)" maxlength="2000" placeholder="Bitte gib hier deine Veranstaltungsbeschreibung ein."></textarea>
+                                <textarea name="{{ form.description.vars.full_name }}" type="text" rows="10" style="font-weight: 100!important;" class="form-control member-form-control-styled_blank" id="inputDescriptionTitle" onkeyup="eventDescriptionCounter(this)" maxlength="2000" placeholder="Bitte gib hier deine Veranstaltungsbeschreibung ein.">{{ form.description.vars.value }}</textarea>
                                 <label for="eventDescriptionCounter">Noch <span id="eventDescriptionCounter">2000</span> Zeichen übrig</label>
                                 {{ form_errors(form.title) }}
                             </div>
@@ -71,7 +71,7 @@
                             <div class="col-md-6 member-profile-section_part">
                                 <div class="member-profile-caption col-md-12">AnbieterIn hinzufügen</div>
                                 <div class="col-md-6 member-profile-section_part">
-                                    <input name="{{ form.trainers.vars.full_name }}[0]" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
+                                    <input value="{{ form.trainers[0].vars.value.getId() }}" name="{{ form.trainers[0].vars.full_name }}" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
                                 </div>
                                 <div class="col-md-6 pl-xs-0 pt-xs-15  pl-sm-0 pt-sm-15 d-sm-inline-table">
                                     <button type="button" name="Add-Trainer" id="addTrainer"  class="btn btn-main" data-container="body" data-toggle="popover" data-placement="top" data-html="true">
@@ -109,50 +109,50 @@
                             </div>
                         </div>
                     </div>
-                    <div class="member-profile-section col-md-12" style="padding-bottom: 35px;">
-                        <div class="col-md-12 pb0">
-                            <div class="member-profile-caption profile-tittle">Medien zur Veranstaltung</div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 member-profile-section_part">
-                            <div class="member-profile-caption">Fotos</div>
-                            <div class="">
-                                <div id="fotosBox">
-                                    <div class="form-group" style="position:relative;">
-                                        <img src="./images/blank-img.png" alt="" class="w100" id="imgBlank-1">
-                                        <a href="#" class="remove_field w100 btn">Bild löschen</a>
-                                        <input type="text" class="member-form-control-styled_blank form-control fotoDescription" id="SubDescription-1">
-                                        <label>Beschreibung</label>
-                                        <span class="fileinput-button">
-                                            <span>Datei auswählen</span>
-                                            <input type="file" class="member-form-control-styled_blank form-control mt15 imgUploader" id="inputUploader-1">
-                                        </span>
-                                        <label>Es können nur jpg-Dateien mit max. 500 KB hochgeladen werden.</label>
-                                    </div>
-                                </div>
-                                <button id="maineStoryFotosBoxInput" type="button" class="btn btn-main DejaVuSerif">+ Foto hinzufügen</button>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 member-profile-section_part">
-                            <div class="member-profile-caption">Videos</div>
-                            <div class="">
-                                <div id="videoBox">
-                                    <div class="form-group">
-                                        <iframe class="w100" id="EventYoutube-1" style="margin-bottom: 15px;" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
-                                        <a href="#" class="remove_video btn">Video löschen</a>
-                                        <input type="text" class="member-form-control-styled_blank form-control videoDescription" id="SubVideoDescription-1">
-                                        <label>Video-Unterzeile</label>
-                                        <input class="form-control member-form-control-styled_blank  videoUploader" id="eventVideo-1" placeholder="Video-Link eingeben">
-                                        <label for="EventYoutube-1">
-                                            Videos können hier nur verlinkt werden (z. B. von YouTube oder deinem eigenen Server).
-                                        </label>
-                                    </div>
-                                </div>
-                                <button id="maineStoryVideoBoxInput" type="button" class="btn btn-main DejaVuSerif">+ Video hinzufügen</button>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-0 member-profile-section_part">
-                        </div>
-                    </div>
+                    {#<div class="member-profile-section col-md-12" style="padding-bottom: 35px;">#}
+                        {#<div class="col-md-12 pb0">#}
+                            {#<div class="member-profile-caption profile-tittle">Medien zur Veranstaltung</div>#}
+                        {#</div>#}
+                        {#<div class="col-lg-4 col-md-4 member-profile-section_part">#}
+                            {#<div class="member-profile-caption">Fotos</div>#}
+                            {#<div class="">#}
+                                {#<div id="fotosBox">#}
+                                    {#<div class="form-group" style="position:relative;">#}
+                                        {#<img src="./images/blank-img.png" alt="" class="w100" id="imgBlank-1">#}
+                                        {#<a href="#" class="remove_field w100 btn">Bild löschen</a>#}
+                                        {#<input type="text" class="member-form-control-styled_blank form-control fotoDescription" id="SubDescription-1">#}
+                                        {#<label>Beschreibung</label>#}
+                                        {#<span class="fileinput-button">#}
+                                            {#<span>Datei auswählen</span>#}
+                                            {#<input type="file" class="member-form-control-styled_blank form-control mt15 imgUploader" id="inputUploader-1">#}
+                                        {#</span>#}
+                                        {#<label>Es können nur jpg-Dateien mit max. 500 KB hochgeladen werden.</label>#}
+                                    {#</div>#}
+                                {#</div>#}
+                                {#<button id="maineStoryFotosBoxInput" type="button" class="btn btn-main DejaVuSerif">+ Foto hinzufügen</button>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="col-lg-4 col-md-4 member-profile-section_part">#}
+                            {#<div class="member-profile-caption">Videos</div>#}
+                            {#<div class="">#}
+                                {#<div id="videoBox">#}
+                                    {#<div class="form-group">#}
+                                        {#<iframe class="w100" id="EventYoutube-1" style="margin-bottom: 15px;" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>#}
+                                        {#<a href="#" class="remove_video btn">Video löschen</a>#}
+                                        {#<input type="text" class="member-form-control-styled_blank form-control videoDescription" id="SubVideoDescription-1">#}
+                                        {#<label>Video-Unterzeile</label>#}
+                                        {#<input class="form-control member-form-control-styled_blank  videoUploader" id="eventVideo-1" placeholder="Video-Link eingeben">#}
+                                        {#<label for="EventYoutube-1">#}
+                                            {#Videos können hier nur verlinkt werden (z. B. von YouTube oder deinem eigenen Server).#}
+                                        {#</label>#}
+                                    {#</div>#}
+                                {#</div>#}
+                                {#<button id="maineStoryVideoBoxInput" type="button" class="btn btn-main DejaVuSerif">+ Video hinzufügen</button>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="col-lg-4 col-md-4 col-sm-0 member-profile-section_part">#}
+                        {#</div>#}
+                    {#</div>#}
                     <div class="member-profile-section col-md-12">
                         <div class="col-md-12">
                             <div class="member-profile-caption">Veranstaltungsart, Datum und Uhrzeiten</div>
@@ -167,7 +167,7 @@
                                 <div class="form-group" style="display:grid;">
                                     <select name="event[type]" class="form-control member-form-control-styled member-profile-visibility" id="eventType">
                                         {% for choice in form.type.vars.choices %}
-                                            <option value="{{ choice.data.id }}">{{ choice.data.title }}</option>
+                                            <option value="{{ choice.data.id }}" {{ choice.data.id == form.type.vars.value ? 'selected' : '' }}>{{ choice.data.title }}</option>
                                         {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo mt5"></i>
@@ -203,7 +203,7 @@
                                 <div class="form-group">
                                     <select name="{{ form.priceType.vars.full_name }}" class="form-control member-form-control-styled" id="eventCosts">
                                         {% for choice in form.priceType.vars.choices %}
-                                            <option value="{{ choice.data }}">{{ choice.label }}</option>
+                                            <option value="{{ choice.data }}" {{ choice.data == form.priceType.vars.value ? 'selected' : '' }}>{{ choice.label }}</option>
                                         {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
@@ -212,7 +212,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2 member-profile-section_part">
                                 <div class="form-group">
-                                    <input name="{{ form.price.vars.full_name }}" type="number" class="form-control member-form-control-styled_blank" id="eventPrice" placeholder="350">
+                                    <input value="{{ form.price.vars.value }}" name="{{ form.price.vars.full_name }}" type="number" class="form-control member-form-control-styled_blank" id="eventPrice" placeholder="350">
                                     <label for="eventPrice">Kosten</label>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                                 <div class="form-group">
                                     <select name="{{ form.currency.vars.full_name }}" class="form-control member-form-control-styled" id="eventCurrency">
                                         {% for choice in form.currency.vars.choices %}
-                                            <option value="{{ choice.data }}">{{ choice.label }}</option>
+                                            <option value="{{ choice.data }}" {{ choice.data == form.currency.vars.value ? 'selected' : '' }}>{{ choice.label }}</option>
                                         {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
@@ -236,35 +236,35 @@
                         <div class="col-md-12">
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <input name="{{ form.location.place.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventPlace" placeholder="Volkshochschule">
+                                    <input value="{{ form.location.place.vars.value }}" name="{{ form.location.place.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventPlace" placeholder="Volkshochschule">
                                     <label for="eventPlace">Firma / Institution</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="{{ form.location.streetAddress.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventAddress" placeholder="Jungfernstieg 17">
+                                    <input value="{{ form.location.streetAddress.vars.value }}" name="{{ form.location.streetAddress.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventAddress" placeholder="Jungfernstieg 17">
                                     <label for="eventAddress">Straße und Hausnummer</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="{{ form.location.city.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventTown" placeholder="Hamburg">
+                                    <input value="{{ form.location.city.vars.value }}" name="{{ form.location.city.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventTown" placeholder="Hamburg">
                                     <label for="eventTown">Ort</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="{{ form.location.website.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventWebSite" placeholder="https://www.vhs-hamburg.de/sdkas">
+                                    <input value="{{ form.location.website.vars.value }}" name="{{ form.location.website.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventWebSite" placeholder="https://www.vhs-hamburg.de/sdkas">
                                     <label for="eventWebSite">Website für weltere infos zur Veranstaltung</label>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <input name="{{ form.location.extraInfo.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventAddres2" placeholder="Haus 7, Raum 234 ">
+                                    <input value="{{ form.location.extraInfo.vars.value }}" name="{{ form.location.extraInfo.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventAddres2" placeholder="Haus 7, Raum 234 ">
                                     <label for="eventAddres2">Adresszusatz</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="{{ form.location.postalCode.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventZipCode" placeholder="21654">
+                                    <input value="{{ form.location.postalCode.vars.value }}" name="{{ form.location.postalCode.vars.full_name }}" class="form-control member-form-control-styled_blank" id="eventZipCode" placeholder="21654">
                                     <label for="eventZipCode">Postleitzahl</label>
                                 </div>
                                 <div class="form-group" style="display: grid;">
                                     <select name="event[location][country]" class="form-control member-form-control-styled member-profile-visibility" id="eventCountry">
                                         {% for choice in form.location.country.vars.choices %}
-                                            <option value="{{ choice.data }}">{{ choice.label }}</option>
+                                            <option value="{{ choice.data }}" {{ choice.data == form.location.country.vars.value ? 'selected' : '' }}>{{ choice.label }}</option>
                                         {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo mt5"></i>
@@ -287,8 +287,9 @@
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
                                     <select name="{{ form.priorKnowledge.vars.full_name }}" class="form-control member-form-control-styled" id="eventKnowledgeNecessary">
-                                        <option value="0">Nein</option>
-                                        <option value="1">Ja</option>
+                                        {% for choice in form.priorKnowledge.vars.choices %}
+                                            <option value="{{ choice.data }}" {{ choice.data == form.priorKnowledge.vars.value ? 'selected' : '' }}>{{ choice.label }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventKnowledgeNecessary">Vorkenntnisse erforderlich?</label>
@@ -297,8 +298,9 @@
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
                                     <select name="{{ form.coach.vars.full_name }}" class="form-control member-form-control-styled" id="eventCoachStatus" onchange="addCoachStatus();">
-                                        <option value="0">Nein</option>
-                                        <option value="1">Ja</option>
+                                        {% for choice in form.coach.vars.choices %}
+                                            <option value="{{ choice.data }}" {{ choice.data == form.coach.vars.value ? 'selected' : '' }}>{{ choice.label }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventCoachStatus">Anerkannt für Ausbildung zum Coach (vtw)?</label>
@@ -307,8 +309,9 @@
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
                                     <select name="{{ form.education.vars.full_name }}" class="form-control member-form-control-styled" id="eventITWeducation" onchange="addITWCredits();">
-                                        <option value="0">Nein</option>
-                                        <option value="1">Ja</option>
+                                        {% for choice in form.education.vars.choices %}
+                                            <option value="{{ choice.data }}" {{ choice.data == form.education.vars.value ? 'selected' : '' }}>{{ choice.label }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="m-icon icon-arrow-combo"></i>
                                     <label for="eventITWeducation">Anerkannt für ITW-Credits?</label>

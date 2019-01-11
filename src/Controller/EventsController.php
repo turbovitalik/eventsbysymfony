@@ -3,18 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use App\Entity\EventTrainer;
 use App\Entity\User;
 use App\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EventsController extends AbstractController
 {
     /**
-     * @Route("/events")
+     * @Route("/events", name="events_main")
      */
     public function index()
     {
@@ -69,15 +67,7 @@ class EventsController extends AbstractController
 
             $em->flush();
 
-
-
-//            $trainers = $event->getTrainers();
-
-
-
-
-
-            return new Response('Event has been saved');
+            return $this->redirectToRoute('events_main');
         }
 
         return $this->render('events/eventForm.html.twig', [
@@ -97,5 +87,37 @@ class EventsController extends AbstractController
         $em->flush();
 
         return $this->redirect('/events');
+    }
+
+    /**
+     * @Route("/events/edit/{id}", name="edit_event")
+     */
+    public function edit(Event $event, Request $request)
+    {
+        $form = $this->createForm(EventType::class, $event, [
+            'action' => $this->generateUrl('edit_event', ['id' => $event->getId()]),
+        ]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $trainers = $em->getRepository(User::class)->findAll();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $event = $form->getData();
+
+            $em->persist($event);
+
+            $em->flush();
+
+            return $this->redirectToRoute('events_main');
+        }
+
+        return $this->render('events/eventForm.html.twig', [
+            'form' => $form->createView(),
+            'trainers' => $trainers,
+        ]);
     }
 }
