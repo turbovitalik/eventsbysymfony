@@ -97,6 +97,9 @@ class TrainerTypeTransformer implements DataTransformerInterface
         $eventTrainers = [];
 
         foreach ($trainersArray as $trainer) {
+
+            $eventTrainer = new EventTrainer();
+
             if (preg_match('#\d+#', $trainer)) {
 
                 $user = $this->entityManager
@@ -112,12 +115,12 @@ class TrainerTypeTransformer implements DataTransformerInterface
                         $trainer
                     ));
                 }
-
-                $eventTrainer = new EventTrainer();
                 $eventTrainer->setUser($user);
-
-                $eventTrainers[] = $eventTrainer;
+            } else {
+                $eventTrainer->setUserName($trainer);
             }
+
+            $eventTrainers[] = $eventTrainer;
         }
 
         return $eventTrainers;

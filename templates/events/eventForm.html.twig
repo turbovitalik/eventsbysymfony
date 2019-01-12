@@ -71,7 +71,7 @@
                             <div class="col-md-6 member-profile-section_part">
                                 <div class="member-profile-caption col-md-12">AnbieterIn hinzufügen</div>
                                 <div class="col-md-6 member-profile-section_part">
-                                    <input value="{{ form.trainers.vars.value|length > 0 ? form.trainers[0].vars.value.user.id : '' }}" name="{{ form.trainers.vars.full_name }}[0]" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
+                                    <input value="{{ form.trainers.vars.value|length > 0 ? form.trainers[0].vars.value.username : '' }}" name="{{ form.trainers.vars.full_name }}[0]" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
                                 </div>
                                 <div class="col-md-6 pl-xs-0 pt-xs-15  pl-sm-0 pt-sm-15 d-sm-inline-table">
                                     <button type="button" name="Add-Trainer" id="addTrainer"  class="btn btn-main" data-container="body" data-toggle="popover" data-placement="top" data-html="true">

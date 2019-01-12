@@ -118,7 +118,7 @@
                                             {{ event.endDate|date('m.d.Y') }}</td>
                                         <td>
                                             <div class="event">
-                                                <a href="#" class="event-title">{{ event.title }}</a> mit <a href="#">{{ event.trainers[0].user.fullName }}</a>
+                                                <a href="#" class="event-title">{{ event.title }}</a> mit <a href="#">{{ event.trainers[0].user ? event.trainers[0].user.fullName : event.trainers[0].username }}</a>
                                             </div>
                                         </td>
                                         <td class="futureEvents-btns">
