@@ -26,7 +26,7 @@
                 <h1 class="col-md-12 title-bold">Veranstaltungen</h1>
                 {#<form novalidate class="col-md-12 profile-events-form" id="profile-events_form" method="post">#}
                     {{ form_start(form) }}
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete-item') }}" />
+                    <input type="hidden" name="event[_token]" value="{{ csrf_token('event') }}" />
                     <div class="member-profile-section col-md-12">
                         <div class="col-md-12">
                             <div class="member-profile-caption profile-tittle">Neue Veranstaltung erstellen</div>
@@ -71,7 +71,7 @@
                             <div class="col-md-6 member-profile-section_part">
                                 <div class="member-profile-caption col-md-12">AnbieterIn hinzufügen</div>
                                 <div class="col-md-6 member-profile-section_part">
-                                    <input value="{{ form.trainers[0].vars.value.getId() }}" name="{{ form.trainers[0].vars.full_name }}" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
+                                    <input value="{{ form.trainers.vars.value|length > 0 ? form.trainers[0].vars.value.getId() : '' }}" name="{{ form.trainers.vars.full_name }}[0]" type="text" class="form-control member-form-control-styled_blank" id="inputTrainerName" placeholder="Namen eingeben">
                                 </div>
                                 <div class="col-md-6 pl-xs-0 pt-xs-15  pl-sm-0 pt-sm-15 d-sm-inline-table">
                                     <button type="button" name="Add-Trainer" id="addTrainer"  class="btn btn-main" data-container="body" data-toggle="popover" data-placement="top" data-html="true">
@@ -176,11 +176,11 @@
                             </div>
                             <div class="col-lg-4 col-md-4 member-profile-section_part">
                                 <div class="form-group">
-                                    <input name="event[startDate]" class="form-control member-form-control-styled_blank" id="dataStartEvent-1" placeholder="Datum auswählen ">
+                                    <input value="{{ form.startDate.vars.value }}" name="event[startDate]" class="form-control member-form-control-styled_blank" id="dataStartEvent-1" placeholder="Datum auswählen ">
                                     <label for="dataStartEvent">Beginn der Veranstaltung (bei mehreren Blöcken: Block 1)</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="event[endDate]" class="form-control member-form-control-styled_blank" id="dataFinishEvent-1" placeholder="Datum auswählen ">
+                                    <input value="{{ form.endDate.vars.value }}" name="event[endDate]" class="form-control member-form-control-styled_blank" id="dataFinishEvent-1" placeholder="Datum auswählen ">
                                     <label for="dataFinishEvent">Beginn der Veranstaltung (bei mehreren Blöcken: Block 1)</label>
                                 </div>
                             </div>
@@ -383,14 +383,14 @@
                 uiLibrary: 'bootstrap4',
                 locale: 'de-de',
                 weekStartDay: 1,
-                value: '01/01/2018'
+                // value: '01/01/2018'
         });
 
         $('#dataFinishEvent-1').datepicker({
                 uiLibrary: 'bootstrap4',
                 locale: 'de-de',
                 weekStartDay: 1,
-                value: '01/01/2018'
+                // value: '01/01/2018'
         });
 
         function readURL(input) {
