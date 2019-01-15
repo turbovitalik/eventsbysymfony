@@ -79,7 +79,7 @@
                                     </button>
                                     <div id="popover-content-addTrainer" class="hide">
                                         <select class="list-group add-trainer-list"  multiple="multiple">
-                                            {% for trainer in trainers %}
+                                            {% for trainer in users %}
                                                 <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="{{ trainer.id }}">{{ trainer.fullName }}</option>
                                             {% endfor %}
                                         </select>
@@ -89,7 +89,7 @@
                             <div class="col-md-6 member-profile-section_part">
                                 <div class="member-profile-caption col-md-12">AssistentIn hinzufügen</div>
                                 <div class="col-md-6 member-profile-section_part">
-                                    <input name="Another-Trainer" type="text" class="form-control member-form-control-styled_blank" id="inputAnotherTrainer" placeholder="Namen eingeben">
+                                    <input value="{{ form.staffMembers.vars.value|length > 0 ? form.staffMembers[0].vars.value.username : '' }}" name="{{ form.staffMembers.vars.full_name }}[0]" type="text" class="form-control member-form-control-styled_blank" id="inputAnotherTrainer" placeholder="Namen eingeben">
                                 </div>
                                 <div class="col-md-6 pl-xs-0 pt-xs-15 pl-sm-0 pt-sm-15 d-sm-inline-table">
                                     <button type="button" name="Add-Another-Trainer" id="addAnotherTrainer"  class="btn btn-main" data-container="body" data-toggle="popover" data-placement="top" data-html="true">
@@ -97,12 +97,9 @@
                                     </button>
                                     <div id="popover-content-addAnotherTrainer" class="hide">
                                         <select class="list-group add-trainer-list"  multiple="multiple">
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 0">Trainer Name 0</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 1">Trainer Name 1</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 2">Trainer Name 2</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 3">Trainer Name 3</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 4">Trainer Name 4</option>
-                                            <option class="list-group-item list-group-item-action" onclick="displayVals2(this)" value="Trainer Name 5">Trainer Name 5</option>
+                                            {% for staff in users %}
+                                                <option class="list-group-item list-group-item-action" onclick="displayVals(this)" value="{{ staff.id }}">{{ staff.fullName }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>

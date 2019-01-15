@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class TrainerTypeTransformer implements DataTransformerInterface
+class EventStaffTransformer implements DataTransformerInterface
 {
     private $entityManager;
 

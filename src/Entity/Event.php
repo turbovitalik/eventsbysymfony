@@ -72,9 +72,14 @@ class Event
     private $endDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="EventTrainer", inversedBy="trainers" ,cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="EventTrainer", inversedBy="trainers", cascade={"persist"})
      */
     private $trainers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="StaffMember", inversedBy="staffMembers", cascade={"persist"})
+     */
+    private $staffMembers;
 
     /**
      * @ORM\ManyToOne(targetEntity="Location", cascade={"persist"})
@@ -101,6 +106,7 @@ class Event
     public function __construct()
     {
         $this->trainers = new ArrayCollection();
+        $this->staffMembers = new ArrayCollection();
     }
 
     /**
@@ -247,15 +253,46 @@ class Event
         return $this->trainers;
     }
 
+    /**
+     * @param EventTrainer $trainer
+     */
     public function addTrainer(EventTrainer $trainer)
     {
         $trainer->addEvent($this);
         $this->trainers[] = $trainer;
     }
 
+    /**
+     * @param $trainers
+     */
     public function setTrainers($trainers)
     {
         $this->trainers = $trainers;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStaffMembers()
+    {
+        return $this->staffMembers;
+    }
+
+    /**
+     * @param StaffMember $staff
+     */
+    public function addStaffMember(StaffMember $staff)
+    {
+        $staff->addEvent($this);
+        $this->staffMembers[] = $staff;
+    }
+
+    /**
+     * @param $staffMembers
+     */
+    public function setStaffMembers($staffMembers)
+    {
+        $this->staffMembers = $staffMembers;
     }
 
     /**

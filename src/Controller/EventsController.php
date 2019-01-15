@@ -55,7 +55,7 @@ class EventsController extends AbstractController
 
         $form = $this->createForm(EventType::class, $event);
 
-        $trainers = $em->getRepository(User::class)->findAll();
+        $users = $em->getRepository(User::class)->findAll();
 
         $form->handleRequest($request);
 
@@ -72,7 +72,7 @@ class EventsController extends AbstractController
 
         return $this->render('events/eventForm.html.twig', [
             'form' => $form->createView(),
-            'trainers' => $trainers,
+            'users' => $users,
         ]);
     }
 
@@ -100,7 +100,7 @@ class EventsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $trainers = $em->getRepository(User::class)->findAll();
+        $users = $em->getRepository(User::class)->findAll();
 
         $form->handleRequest($request);
 
@@ -117,7 +117,7 @@ class EventsController extends AbstractController
 
         return $this->render('events/eventForm.html.twig', [
             'form' => $form->createView(),
-            'trainers' => $trainers,
+            'users' => $users,
         ]);
     }
 }

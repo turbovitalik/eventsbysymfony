@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Event;
-use App\Form\DataTransformer\TrainerTypeTransformer;
+use App\Form\DataTransformer\EventStaffTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,11 +18,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
 {
-    private $trainerDataTransformer;
+    private $eventStaffTransformer;
 
-    public function __construct(TrainerTypeTransformer $trainerDataTransformer)
+    public function __construct(EventStaffTransformer $eventStaffTransformer)
     {
-        $this->trainerDataTransformer = $trainerDataTransformer;
+        $this->eventStaffTransformer = $eventStaffTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -63,6 +63,11 @@ class EventType extends AbstractType
                 'format' => 'MM/dd/yyyy',
             ])
             ->add('trainers',CollectionType::class, [
+                'entry_type' => TextType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
+            ->add('staffMembers',CollectionType::class, [
                 'entry_type' => TextType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
