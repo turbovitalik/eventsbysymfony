@@ -67,18 +67,7 @@ class EventsController extends AbstractController
 
             /** @var EventPhoto $photo */
             foreach ($event->getPhotos() as $photo) {
-                if (null === $photo->getFile()) {
-                    return;
-                }
-
-                $photo->getFile()->move(
-                    $photo->getUploadRootDir(),
-                    $photo->getFile()->getClientOriginalName()
-                );
-
-                $photo->setPath($photo->getFile()->getClientOriginalName());
-
-                $photo->setFile(null);
+                $photo->upload();
             }
 
             $em->persist($event);

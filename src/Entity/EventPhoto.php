@@ -133,4 +133,20 @@ class EventPhoto
             ? null
             : $this->getUploadRootDir() . '/' . $this->path;
     }
+
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        $this->getFile()->move(
+            $this->getUploadRootDir(),
+            $this->getFile()->getClientOriginalName()
+        );
+
+        $this->path = $this->getFile()->getClientOriginalName();
+
+        $this->file = null;
+    }
 }

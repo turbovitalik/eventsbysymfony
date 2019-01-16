@@ -104,7 +104,7 @@ class Event
     private $currency;
 
     /**
-     * @ORM\OneToMany(targetEntity="EventPhoto", mappedBy="event", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="EventPhoto", mappedBy="event", cascade={"persist", "remove"})
      */
     private $photos;
 
