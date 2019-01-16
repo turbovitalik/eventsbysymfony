@@ -103,10 +103,16 @@ class Event
      */
     private $currency;
 
+    /**
+     * @ORM\OneToMany(targetEntity="EventPhoto", mappedBy="event", cascade={"persist"})
+     */
+    private $photos;
+
     public function __construct()
     {
         $this->trainers = new ArrayCollection();
         $this->staffMembers = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     /**
@@ -369,4 +375,32 @@ class Event
         }
         $this->currency = $currency;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * @param mixed $photos
+     */
+    public function setPhotos($photos): void
+    {
+        $this->photos = $photos;
+    }
+
+    public function addPhoto(EventPhoto $photo)
+    {
+        $photo->setEvent($this);
+        $this->photos->add($photo);
+    }
+
+    public function removePhoto(EventPhoto $photo)
+    {
+
+    }
+
 }

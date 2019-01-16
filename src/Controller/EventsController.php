@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\EventPhoto;
 use App\Entity\User;
 use App\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +62,24 @@ class EventsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            /** @var Event $event */
             $event = $form->getData();
+
+            /** @var EventPhoto $photo */
+            foreach ($event->getPhotos() as $photo) {
+                if (null === $photo->getFile()) {
+                    return;
+                }
+
+                $photo->getFile()->move(
+                    $photo->getUploadRootDir(),
+                    $photo->getFile()->getClientOriginalName()
+                );
+
+                $photo->setPath($photo->getFile()->getClientOriginalName());
+
+                $photo->setFile(null);
+            }
 
             $em->persist($event);
 

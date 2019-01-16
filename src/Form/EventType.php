@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -88,10 +89,15 @@ class EventType extends AbstractType
                     'CHF' => 'CHF',
                 ]
             ])
+            ->add('photos', CollectionType::class, [
+                'entry_type' => EventPhotoType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+            ])
             ->add('save', SubmitType::class);
 
         $builder->get('trainers')
-            ->addModelTransformer($this->trainerDataTransformer);
+            ->addModelTransformer($this->eventStaffTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)
